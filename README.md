@@ -11,8 +11,6 @@ A small, type-safe validation library for Express APIs.
 
 It’s intentionally minimal and avoids pulling in large dependencies.
 
-## --------
-
 ## Why this exists
 
 Most validation libraries solve only part of the problem:
@@ -29,20 +27,18 @@ No decorators, no code generation step, no magic.
 
 Features
 
-Type-first schema definitions
+- Type-first schema definitions
+- Runtime validation with readable errors
+- Express middleware out of the box
+- OpenAPI 3.1 schema generation
+- Small API surface
+- Minimal runtime dependencies
 
-Runtime validation with readable errors
+## Installation
 
-Express middleware out of the box
-
-OpenAPI 3.1 schema generation
-
-Small API surface
-
-Zero runtime dependencies
-
-Installation
+```bash
 pnpm add @ex/val
+```
 
 # or
 
