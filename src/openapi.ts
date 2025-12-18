@@ -3,7 +3,7 @@ import { Schema } from './types';
 type Route = {
 	method: 'get' | 'post' | 'put' | 'patch' | 'delete';
 	path: string;
-	requestBody?: Schema<any>;
+	requestBody: Schema<any>;
 	responses: Record<number, Schema<any>>;
 };
 

@@ -2,9 +2,9 @@ import { RequestHandler, Request, Response, NextFunction } from 'express';
 import { Schema } from './types';
 
 type Targets = Partial<{
-	body: Schema<any>;
-	query: Schema<any>;
-	params: Schema<any>;
+	body?: Schema<any>;
+	query?: Schema<any>;
+	params?: Schema<any>;
 }>;
 
 export function validate<T extends Targets>(targets: T): RequestHandler {
