@@ -1,23 +1,20 @@
 {
-  "name": "ex-val",
-  "version": "1.0.0",
+  "name": "@samuelbines/ex-val",
+  "version": "1.0.3",
   "description": "",
-  "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    }
-  },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc",
     "test": "vitest run",
     "test:watch": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/SamuelDBines/ex-val.git"
   },
   "keywords": [],
   "author": "",
