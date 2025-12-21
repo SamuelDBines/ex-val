@@ -1,3 +1,15 @@
+import http from 'http';
+
+export enum HttpMethod {
+	GET = 'get',
+	POST = 'post',
+	PUT = 'put',
+	PATCH = 'patch',
+	DELETE = 'delete',
+}
+
+export type HttpMethodType = HttpMethod;
+
 export type Issue = {
 	path: (string | number)[];
 	message: string;
@@ -13,5 +25,19 @@ export interface Schema<T> {
 	nullable(): Schema<T | null>;
 	toOpenAPI(): any;
 }
+export interface BooleanSchema<T> extends Schema<T> {}
+// const test: Schema<any> = {
+// 	kind: '',
+// 	validate:
+// }
 
 export type Infer<S> = S extends Schema<infer T> ? T : never;
+
+export interface RequestContext<S> extends http.IncomingMessage {
+	pathname: string;
+	query: URLSearchParams;
+	params: Record<string, string>;
+	body?: Infer<S>;
+}
+
+export type NextFunction = (err?: unknown) => void;

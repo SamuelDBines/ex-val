@@ -1,5 +1,5 @@
-import { RequestHandler, Request, Response, NextFunction } from 'express';
-import { Schema } from './types';
+import http from 'http';
+import { Schema, NextFunction, RequestContext, Issue } from './types';
 
 type Targets = Partial<{
 	body?: Schema<any>;
@@ -7,9 +7,13 @@ type Targets = Partial<{
 	params?: Schema<any>;
 }>;
 
-export function validate<T extends Targets>(targets: T): RequestHandler {
-	return (req: Request, res: Response, next: NextFunction) => {
-		const errors: any[] = [];
+export function validate<T extends Targets>(targets: T) {
+	return (
+		req: RequestContext<T>,
+		res: http.ServerResponse,
+		next: NextFunction
+	) => {
+		const errors: Issue[] = [];
 
 		if (targets.params) {
 			const r = targets.params.validate(req.params, ['params']);
@@ -27,10 +31,11 @@ export function validate<T extends Targets>(targets: T): RequestHandler {
 			else errors.push(...r.errors);
 		}
 
-		if (errors.length)
-			return res
-				.status(400)
-				.json({ error: 'VALIDATION_ERROR', details: errors });
+		if (errors.length) {
+			res.writeHead(400, { 'Content-Type': 'application/json' });
+			res.end({ error: 'VALIDATION_ERROR', details: errors });
+			return;
+		}
 		next();
 	};
 }

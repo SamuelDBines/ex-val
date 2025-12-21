@@ -1,4 +1,5 @@
 import { Schema, Result, Issue } from './types';
+import { optional, nullable } from './shared';
 
 type Shape = Record<string, Schema<any>>;
 
@@ -75,11 +76,4 @@ export function object<S extends Shape>(shape: S) {
 	};
 
 	return schema as any;
-}
-
-function optional<T>(inner: Schema<T>): Schema<T | undefined> {
-	/* same pattern */ throw new Error();
-}
-function nullable<T>(inner: Schema<T>): Schema<T | null> {
-	/* same pattern */ throw new Error();
 }

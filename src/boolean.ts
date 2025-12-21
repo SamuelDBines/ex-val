@@ -1,4 +1,5 @@
 import type { Result, Schema } from './types';
+import { optional, nullable } from './shared';
 
 export function boolean(): Schema<boolean> {
 	const self: any = {
@@ -24,44 +25,4 @@ export function boolean(): Schema<boolean> {
 	};
 
 	return self;
-}
-
-function optional<T>(inner: Schema<T>): Schema<T | undefined> {
-	return {
-		kind: `${inner.kind}.optional`,
-		validate(input, path = []) {
-			return input === undefined
-				? { ok: true, value: undefined }
-				: inner.validate(input, path);
-		},
-		optional() {
-			return this;
-		},
-		nullable() {
-			return nullable(this);
-		},
-		toOpenAPI() {
-			return inner.toOpenAPI();
-		},
-	};
-}
-
-function nullable<T>(inner: Schema<T>): Schema<T | null> {
-	return {
-		kind: `${inner.kind}.nullable`,
-		validate(input, path = []) {
-			return input === null
-				? { ok: true, value: null }
-				: inner.validate(input, path);
-		},
-		optional() {
-			return optional(this);
-		},
-		nullable() {
-			return this;
-		},
-		toOpenAPI() {
-			return { anyOf: [inner.toOpenAPI(), { type: 'null' }] };
-		},
-	};
 }

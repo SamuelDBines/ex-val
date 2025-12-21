@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { v, openapi } from '../src/index';
+import { v, openapi, HttpMethod } from '../src/index';
 
 describe('openapi()', () => {
 	it('emits basic OpenAPI doc', () => {
@@ -15,7 +15,7 @@ describe('openapi()', () => {
 			version: '1.0.0',
 			routes: [
 				openapi.route({
-					method: 'post',
+					method: HttpMethod.POST,
 					path: '/users',
 					requestBody: CreateUser,
 					responses: { 200: Ok },

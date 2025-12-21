@@ -1,6 +1,6 @@
 // src/index.ts
 export * from './types';
-export * from './expressh';
+export * from './validate';
 export * from './openapi';
 import { string } from './string';
 import { number } from './number';

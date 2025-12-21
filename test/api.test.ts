@@ -2,6 +2,8 @@ import { describe, it, expect, vi } from 'vitest';
 import { createApi } from '../src/api';
 import { v } from '../src/index';
 
+import { mockRes } from './helpers';
+
 function makeMockApp() {
 	const postCalls: any[] = [];
 	const getCalls: any[] = [];
@@ -51,18 +53,7 @@ describe('createApi(app)', () => {
 			query: {},
 			params: {},
 		};
-		const res: any = {
-			statusCode: 200,
-			body: undefined,
-			status(code: number) {
-				this.statusCode = code;
-				return this;
-			},
-			json(payload: any) {
-				this.body = payload;
-				return this;
-			},
-		};
+		const res = mockRes();
 		const next = vi.fn();
 
 		mw(req, res, next);

@@ -1,16 +1,23 @@
 {
   "name": "@samuelbines/ex-val",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "package.json"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:local": "pnpm build && ts-node examples/example.ts"
   },
   "repository": {
     "type": "git",
@@ -23,10 +30,18 @@
   "dependencies": {
     "express": "^4.21.2"
   },
+  "engines": {
+    "node": ">=12",
+    "pnpm": ">=5"
+  },
+  "browser": {
+    "fs": false
+  },
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^25.0.3",
     "nodemon": "^3.1.11",
+    "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
     "vitest": "^4.0.16"
   }

@@ -1,17 +1,19 @@
-import { Schema } from './types';
+import { Schema, HttpMethodType } from './types';
 
 type Route = {
-	method: 'get' | 'post' | 'put' | 'patch' | 'delete';
+	method: HttpMethodType;
 	path: string;
 	requestBody: Schema<any>;
 	responses: Record<number, Schema<any>>;
 };
 
-export const openapi = (opts: {
+type OpenapiOptions = {
 	title: string;
 	version: string;
 	routes: Route[];
-}) => {
+};
+
+export const openapi = (opts: OpenapiOptions) => {
 	const paths: any = {};
 
 	for (const r of opts.routes) {
