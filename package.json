@@ -1,8 +1,8 @@
 {
   "name": "@samuelbines/ex-val",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "",
-  "main": "./dist/index.js",
+  "main": "./dist/index",
   "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public"
