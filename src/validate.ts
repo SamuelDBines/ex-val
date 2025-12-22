@@ -33,7 +33,7 @@ export function validate<T extends Targets>(targets: T) {
 
 		if (errors.length) {
 			res.writeHead(400, { 'Content-Type': 'application/json' });
-			res.end({ error: 'VALIDATION_ERROR', details: errors });
+			res.end(JSON.stringify({ error: 'VALIDATION_ERROR', details: errors }));
 			return;
 		}
 		next();

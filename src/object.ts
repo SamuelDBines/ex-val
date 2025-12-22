@@ -64,7 +64,6 @@ export function object<S extends Shape>(shape: S) {
 
 			for (const [k, s] of Object.entries(shape)) {
 				properties[k] = s.toOpenAPI();
-				// detect optional: simplest is to tag optional schemas in their kind string
 				if (!String(s.kind).includes('.optional')) required.push(k);
 			}
 
