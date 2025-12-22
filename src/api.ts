@@ -1,4 +1,3 @@
-import type { Express, RequestHandler } from 'express';
 import type { Schema, HttpMethodType } from './types';
 import { validate } from './validate';
 import { openapi as buildOpenApi } from './openapi';
@@ -13,14 +12,14 @@ type RouteDef = {
 	responses?: Record<number, Schema<any>>;
 };
 
-export function createApi(app: Express) {
+export function createApi(app: any) {
 	const routes: RouteDef[] = [];
 
 	function add(
 		method: RouteDef['method'],
 		path: string,
 		def: Omit<RouteDef, 'method' | 'path'>,
-		handler: RequestHandler
+		handler: any
 	) {
 		routes.push({ method, path, ...def });
 		const targets: any = {};
@@ -34,15 +33,15 @@ export function createApi(app: Express) {
 	}
 
 	return {
-		get: (path: string, def: any, handler: RequestHandler) =>
+		get: (path: string, def: any, handler: any) =>
 			add(HttpMethod.GET, path, def, handler),
-		post: (path: string, def: any, handler: RequestHandler) =>
+		post: (path: string, def: any, handler: any) =>
 			add(HttpMethod.POST, path, def, handler),
-		put: (path: string, def: any, handler: RequestHandler) =>
+		put: (path: string, def: any, handler: any) =>
 			add(HttpMethod.PUT, path, def, handler),
-		patch: (path: string, def: any, handler: RequestHandler) =>
+		patch: (path: string, def: any, handler: any) =>
 			add(HttpMethod.PATCH, path, def, handler),
-		delete: (path: string, def: any, handler: RequestHandler) =>
+		delete: (path: string, def: any, handler: any) =>
 			add(HttpMethod.DELETE, path, def, handler),
 
 		openapi: (info: { title: string; version: string }) =>
